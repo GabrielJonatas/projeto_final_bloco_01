@@ -17,7 +17,7 @@ public class Menu {
 		Scanner leia = new Scanner(System.in);
 		int opcao;
 		
-		int codigo = 0, tipo, quantidadeEmEstoque, carboidrato;
+		int codigo, tipo, quantidadeEmEstoque, carboidrato;
 		double preco;
 		String nome, marca, tipoProteina, sabor;
 		char simOuNao;

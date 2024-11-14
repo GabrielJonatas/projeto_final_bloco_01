@@ -8,7 +8,7 @@ import ecommerce.repository.EcommerceRepository;
 
 public class EcommerceController implements EcommerceRepository {
 
-	List<Suplemento> suplementos = new ArrayList<>();
+	private ArrayList<Suplemento> suplementos = new ArrayList<>();
 	private ArrayList<String> logs = new ArrayList<String>();
 	
 	int codigo = 0;
@@ -62,7 +62,7 @@ public class EcommerceController implements EcommerceRepository {
 		if (suplemento != null) {
 			try {
 				if (suplementos.remove(suplemento)) {
-					System.out.println("\nO suplemento de código: " + codigo + " foi deletado com sucesso!");									 
+					System.out.println("\nO suplemento de código: " + codigo + " foi deletado com sucesso!");		
 				}
 			} catch (Exception e) {
 				System.out.println("Ocorreu um erro muito estranho monstro! Vamos chamar os nerds para resolver");
@@ -76,7 +76,7 @@ public class EcommerceController implements EcommerceRepository {
 		return ++ codigo;
 	}
 	
-	public Suplemento buscarNaCollection(int codigoo) {
+	public Suplemento buscarNaCollection(int codigo) {
 		for(var suplemento: suplementos) {
 			if (suplemento.getCodigo() == codigo) {
 				return suplemento;
