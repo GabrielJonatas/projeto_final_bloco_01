@@ -8,6 +8,14 @@ public abstract class Suplemento {
 	private double preco;
 	private int quantidadeEmEstoque;
 	
+	public int getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(int tipo) {
+		this.tipo = tipo;
+	}
+
 	public Suplemento(int codigo, String nome, String marca, int tipo, double preco, int quantidadeEmEstoque) {
 		this.codigo = codigo;
 		this.nome = nome;

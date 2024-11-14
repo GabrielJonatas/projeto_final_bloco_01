@@ -2,7 +2,7 @@ package ecommerce.repository;
 
 import ecommerce.model.Suplemento;
 
-public interface SuplementoRepository {
+public interface EcommerceRepository {
 	
 	// CRUD da Loja
 	public void procurarPorCodigo(int numero);
