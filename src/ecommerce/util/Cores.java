@@ -1,4 +1,4 @@
-package conta.util;
+package ecommerce.util;
 
 public class Cores {
 

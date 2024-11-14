@@ -1,14 +1,29 @@
-package conta;
+package ecommerce;
 
 import java.util.Scanner;
 
-import conta.util.Cores;
+import ecommerce.model.SuplementoHipercalorico;
+import ecommerce.model.SuplementoProteico;
+import ecommerce.util.Cores;
 
 public class Menu {
 	public static void main(String[] args) {
 
 		Scanner leia = new Scanner(System.in);
 		int opcao;
+		
+		// Teste
+		SuplementoHipercalorico hipercalorico1 = new SuplementoHipercalorico(
+			    1, "Hipercalórico Massa", "Max Titanium", 1, 50.00, 30
+			);
+		
+		// Teste
+		SuplementoProteico proteico2 = new SuplementoProteico(
+			    4, "Proteína Vegana", "VeganWay", 2, 100.00, 40, "Proteína da Soja", 5
+			);
+		
+		hipercalorico1.visualizar();
+		proteico2.visualizar();
 
 		while (true) {
 			System.out.println(Cores.TEXT_YELLOW + Cores.ANSI_BLACK_BACKGROUND
