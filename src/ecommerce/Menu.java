@@ -23,22 +23,22 @@ public class Menu {
 		char simOuNao;
 		
 		SuplementoHipercalorico hipercalorico1 = new SuplementoHipercalorico(
-			    ecommerce.gerarCodigo(), "Hipercalórico Massa", "Max Titanium", 1, 50.00, 50
+			    ecommerce.gerarCodigo(), "Hipercalórico Massa", "Good Shape", 1, 50.00, 50
 			);
 		ecommerce.cadastrar(hipercalorico1);
 		
 		SuplementoHipercalorico hipercalorico2 = new SuplementoHipercalorico(
-				ecommerce.gerarCodigo(), "Hipercalórico Radical", "Growth", 1, 80.00, 30, "Morango"
+				ecommerce.gerarCodigo(), "Hipercalórico Radical", "Grow Monster", 1, 80.00, 30, "Morango"
 			);
 		ecommerce.cadastrar(hipercalorico2);
 		
 		SuplementoProteico proteico1 = new SuplementoProteico(
-				ecommerce.gerarCodigo(), "Proteína Vegana", "VeganWay", 2, 100.00, 40, "Proteína da Soja"
+				ecommerce.gerarCodigo(), "Proteína Vegana", "Caminho vegano", 2, 100.00, 40, "Proteína da Soja"
 			);
 		ecommerce.cadastrar(proteico1);
 
 		SuplementoProteico proteico2 = new SuplementoProteico(
-				ecommerce.gerarCodigo(), "Proteína do Leite", "Growth", 2, 180.00, 20, "Whey", 0
+				ecommerce.gerarCodigo(), "Proteína do Leite", "Grow Monster", 2, 180.00, 20, "Whey", 0
 			);
 		ecommerce.cadastrar(proteico2);
 		
@@ -55,7 +55,8 @@ public class Menu {
 			System.out.println("            3 - Buscar suplemento por código         ");
 			System.out.println("            4 - Atualizar dados de um suplemento     ");
 			System.out.println("            5 - Apagar suplemento                    ");
-			System.out.println("            6 - Sair                                 ");
+			System.out.println("            6 - Imprimir logs de erro do sistema     ");
+			System.out.println("            7 - Sair                                 ");
 			System.out.println("                                                     ");
 			System.out.println("*****************************************************");
 			System.out.println("Entre com a opção desejada:                          ");
@@ -70,7 +71,7 @@ public class Menu {
 				keyPress();
 			}
 
-			if (opcao == 6) {
+			if (opcao == 7) {
 				System.out.println(Cores.TEXT_YELLOW + Cores.ANSI_BLACK_BACKGROUND + "\nMonster Factory - Saia da jaula também monstro!!");
 				sobre();
                 leia.close();
@@ -86,18 +87,18 @@ public class Menu {
 					nome = leia.nextLine();
 					System.out.println("Digite a marca: ");
 					marca = leia.next();
-					
+						
 					do {
 						System.out.println("Digite o tipo de suplemento (1-hipercalórico ou 2-suplemento protéico): ");
 						tipo = leia.nextInt();
 					} while(tipo < 1 && tipo > 2);
-					
+						
 					System.out.println("Digite o preço (R$): ");
 					preco = leia.nextFloat();
-					
+						
 					System.out.println("Digite a quantidade em estoque: ");
-					quantidadeEmEstoque = leia.nextInt();	
-					
+					quantidadeEmEstoque = leia.nextInt();
+						
 					switch(tipo) {
 					case 1 -> {
 						System.out.println("Tem sabor?");
@@ -123,8 +124,9 @@ public class Menu {
 						} else {
 							ecommerce.cadastrar(new SuplementoProteico(ecommerce.gerarCodigo(), nome, marca, tipo, preco, quantidadeEmEstoque, tipoProteina));								
 						}
+						}
 					}
-				}
+					
 					keyPress();
 				}
 				case 2 -> {
@@ -214,8 +216,26 @@ public class Menu {
 					
 					keyPress();
 				}
+				case 6 -> {
+					System.out.println(Cores.TEXT_WHITE + "Imprimir logs de erro do sistema\n\n");
+					
+					ecommerce.logsSistema();
+					
+					keyPress();
+				}
 				default -> System.out.println(Cores.TEXT_RED_BOLD + "\nOpção Inválida!\n");
 			}
+		}
+	}
+	
+	public static void keyPress() {
+		
+		try {
+			System.out.println(Cores.TEXT_RESET + "\n\nPressione Enter para Continuar...");
+			System.in.read();
+			
+		} catch (IOException e) {
+			System.out.println("Você pressionou uma tecla diferente de enter!");
 		}
 	}
     
@@ -229,17 +249,6 @@ public class Menu {
 	}
 	
     
-	public static void keyPress() {
-		
-		try {
-			
-			System.out.println(Cores.TEXT_RESET + "\n\nPressione Enter para Continuar...");
-			System.in.read();
-			
-		} catch (IOException e) {
-			
-			System.out.println("Você pressionou uma tecla diferente de enter!");
-		}
-	}
+
 
 }

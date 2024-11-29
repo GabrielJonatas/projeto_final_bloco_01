@@ -8,8 +8,8 @@ import ecommerce.repository.EcommerceRepository;
 
 public class EcommerceController implements EcommerceRepository {
 
-	private ArrayList<Suplemento> suplementos = new ArrayList<>();
-	private ArrayList<String> logs = new ArrayList<String>();
+	private List<Suplemento> suplementos = new ArrayList<>();
+	private ArrayList<Exception> logs = new ArrayList<>();
 	
 	int codigo = 0;
 	
@@ -25,6 +25,10 @@ public class EcommerceController implements EcommerceRepository {
 
 	@Override
 	public void listasTodos() {
+		if(suplementos.isEmpty()) {
+			System.out.println("Não há suplementos cadastrados!");
+			return;
+		}
 		suplementos.forEach((var suplemento) -> suplemento.visualizar());
 	}
 
@@ -35,7 +39,8 @@ public class EcommerceController implements EcommerceRepository {
 			System.out.println("\nO suplemento número: " + suplemento.getCodigo() + " foi inserido com sucesso!");
 		} catch (Exception e) {
 			System.out.println("Ocorreu um erro muito estranho monstro! Vamos chamar os nerds para resolver");
-			logs.add(e.getMessage());
+			logs.add(e);
+			return;
 		}
 	}
 
@@ -49,7 +54,8 @@ public class EcommerceController implements EcommerceRepository {
 				System.out.println("\nO suplemento de código: " + suplemento.getCodigo() + " foi atualizada com sucesso!");				
 			} catch (Exception e) {
 				System.out.println("Ocorreu um erro muito estranho monstro! Vamos chamar os nerds para resolver");
-				logs.add(e.getMessage());
+				logs.add(e);
+				return;
 			}
 		} else 
 			System.out.println("\nO suplemento de código: " + suplemento.getCodigo() + " não foi encontrado!");
@@ -61,15 +67,34 @@ public class EcommerceController implements EcommerceRepository {
 		
 		if (suplemento != null) {
 			try {
+				for(Suplemento s: suplementos) {
+					if (s.getCodigo() > codigo) {
+						s.setCodigo(s.getCodigo() - 1);
+					}
+				}
 				if (suplementos.remove(suplemento)) {
 					System.out.println("\nO suplemento de código: " + codigo + " foi deletado com sucesso!");		
 				}
 			} catch (Exception e) {
 				System.out.println("Ocorreu um erro muito estranho monstro! Vamos chamar os nerds para resolver");
-				logs.add(e.getMessage());
+				logs.add(e);
+				return;
 			}
 		} else
 			System.out.println("\nO suplemento de código: " + codigo + " não foi encontrado!");
+	}
+	
+	public void logsSistema() {
+		int contador = 0;
+		if(logs.isEmpty()) {
+			System.out.println("Não há registros de logs de erro no sistema.");
+		} else {
+			for (Exception e: logs) {
+				contador ++;
+				System.out.println("Erro: " + contador);
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public int gerarCodigo() {
